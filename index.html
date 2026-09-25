@@ -29,47 +29,30 @@ body{
     font-family:'Montserrat',sans-serif;
 }
 
-/* ================================
+/* ===============================
    BACKGROUND
 ================================ */
 
 .background{
     position:fixed;
     inset:0;
-    overflow:hidden;
+    z-index:0;
 
     background:
         radial-gradient(
-            circle at 50% 45%,
-            rgba(181,139,45,.13),
-            transparent 27%
+            circle at 50% 40%,
+            rgba(218,178,78,.14),
+            transparent 28%
         ),
         radial-gradient(
-            circle at 15% 20%,
-            rgba(255,215,120,.04),
+            circle at 20% 20%,
+            rgba(255,255,255,.03),
             transparent 25%
         ),
         #030303;
 }
 
-.background::after{
-    content:"";
-
-    position:absolute;
-    inset:0;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,.015),
-            transparent
-        );
-
-    pointer-events:none;
-}
-
-/* ================================
+/* ===============================
    PARTICLES
 ================================ */
 
@@ -80,7 +63,7 @@ body{
     pointer-events:none;
 }
 
-/* ================================
+/* ===============================
    SCREEN
 ================================ */
 
@@ -112,8 +95,8 @@ body{
     transform:scale(1);
 }
 
-/* ================================
-   INTRO
+/* ===============================
+   FIRST SCREEN
 ================================ */
 
 .intro-subtitle{
@@ -127,39 +110,40 @@ body{
 
     color:rgba(255,255,255,.45);
 
-    animation:softPulse 3s infinite;
+    animation:pulseText 3s infinite;
 }
 
-@keyframes softPulse{
+@keyframes pulseText{
+
     0%,100%{
         opacity:.35;
     }
 
     50%{
-        opacity:.75;
+        opacity:.8;
     }
 }
 
-/* ================================
+/* ===============================
    ENVELOPE
 ================================ */
 
 .envelope-wrapper{
-    width:330px;
-    height:235px;
+    width:320px;
+    height:225px;
+
+    position:relative;
 
     perspective:1200px;
 
     cursor:pointer;
 
-    position:relative;
-
     filter:
         drop-shadow(
-            0 35px 40px rgba(0,0,0,.75)
+            0 30px 35px rgba(0,0,0,.7)
         )
         drop-shadow(
-            0 0 35px rgba(217,180,91,.12)
+            0 0 30px rgba(218,178,78,.12)
         );
 }
 
@@ -168,10 +152,9 @@ body{
     inset:0;
 
     transform-style:preserve-3d;
-
-    transition:
-        transform 1.2s cubic-bezier(.2,.8,.2,1);
 }
+
+/* envelope body */
 
 .envelope-body{
     position:absolute;
@@ -182,13 +165,13 @@ body{
     background:
         linear-gradient(
             145deg,
-            #d9b45b,
-            #8c6b27 45%,
-            #b28b38
+            #e1c06b,
+            #8d6a25 50%,
+            #b28b36
         );
 
     box-shadow:
-        inset 0 0 0 1px rgba(255,255,255,.2),
+        inset 0 0 0 1px rgba(255,255,255,.18),
         inset 0 -20px 40px rgba(0,0,0,.18);
 }
 
@@ -200,20 +183,20 @@ body{
 
     background:
         linear-gradient(
-            32deg,
+            35deg,
             transparent 49.5%,
-            rgba(73,48,7,.45) 50%,
+            rgba(72,47,5,.42) 50%,
             transparent 50.5%
         ),
         linear-gradient(
-            -32deg,
+            -35deg,
             transparent 49.5%,
-            rgba(73,48,7,.45) 50%,
+            rgba(72,47,5,.42) 50%,
             transparent 50.5%
         );
-
-    border-radius:5px;
 }
+
+/* flap */
 
 .envelope-flap{
     position:absolute;
@@ -227,8 +210,8 @@ body{
     background:
         linear-gradient(
             145deg,
-            #f0d47e,
-            #b58d38
+            #f3d982,
+            #b48b34
         );
 
     clip-path:
@@ -247,6 +230,8 @@ body{
     z-index:6;
 }
 
+/* paper */
+
 .letter{
     position:absolute;
 
@@ -259,15 +244,17 @@ body{
     background:
         linear-gradient(
             135deg,
-            #fffdf6,
-            #eee4c8
+            #fffdf7,
+            #eee3c7
         );
 
-    color:#342a16;
-
-    border-radius:2px;
+    color:#3c3019;
 
     z-index:2;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
     transform:
         translateY(0)
@@ -277,25 +264,8 @@ body{
         transform 1.5s
         cubic-bezier(.2,.8,.2,1);
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
     box-shadow:
         0 8px 20px rgba(0,0,0,.3);
-}
-
-.letter::after{
-    content:"";
-
-    width:70px;
-    height:70px;
-
-    border:1px solid rgba(150,110,30,.3);
-
-    border-radius:50%;
-
-    position:absolute;
 }
 
 .letter-mark{
@@ -303,8 +273,10 @@ body{
 
     font-size:30px;
 
-    color:#98752e;
+    color:#94712a;
 }
+
+/* seal */
 
 .seal{
     position:absolute;
@@ -312,8 +284,8 @@ body{
     left:50%;
     top:50%;
 
-    width:63px;
-    height:63px;
+    width:60px;
+    height:60px;
 
     transform:
         translate(-50%,-15%);
@@ -329,10 +301,14 @@ body{
     background:
         radial-gradient(
             circle at 35% 30%,
-            #fff0a7,
+            #fff1a7,
             #d9b45b 42%,
             #80601c
         );
+
+    color:#4d380d;
+
+    font-size:23px;
 
     border:2px solid rgba(255,255,255,.2);
 
@@ -340,14 +316,12 @@ body{
         0 5px 18px rgba(0,0,0,.45),
         0 0 25px rgba(217,180,91,.15);
 
-    color:#4d380d;
-
-    font-size:25px;
-
     transition:
         opacity .5s,
         transform 1s;
 }
+
+/* opening */
 
 .envelope.open .envelope-flap{
     transform:rotateX(180deg);
@@ -355,7 +329,7 @@ body{
 
 .envelope.open .letter{
     transform:
-        translateY(-125px)
+        translateY(-120px)
         translateZ(30px);
 }
 
@@ -367,8 +341,10 @@ body{
         scale(.5);
 }
 
+/* hint */
+
 .open-hint{
-    margin-top:50px;
+    margin-top:45px;
 
     font-size:9px;
 
@@ -376,19 +352,20 @@ body{
 
     text-transform:uppercase;
 
-    color:rgba(255,255,255,.42);
+    color:rgba(255,255,255,.4);
 
     animation:
         hintPulse 2.5s infinite;
 }
 
 @keyframes hintPulse{
+
     50%{
-        color:rgba(217,180,91,.9);
+        color:#d9b45b;
     }
 }
 
-/* ================================
+/* ===============================
    COUNTDOWN
 ================================ */
 
@@ -396,20 +373,16 @@ body{
     font-family:'Cormorant Garamond',serif;
 
     font-size:
-        clamp(110px,25vw,230px);
-
-    font-weight:400;
-
-    line-height:1;
+        clamp(100px,25vw,220px);
 
     color:#d9b45b;
 
     text-shadow:
         0 0 25px rgba(217,180,91,.35),
-        0 0 90px rgba(217,180,91,.15);
+        0 0 80px rgba(217,180,91,.15);
 
     animation:
-        countdownIn .9s ease;
+        countIn .9s ease;
 }
 
 .countdown-caption{
@@ -424,12 +397,12 @@ body{
     color:rgba(255,255,255,.4);
 }
 
-@keyframes countdownIn{
+@keyframes countIn{
 
     from{
         opacity:0;
-        transform:scale(1.7);
-        filter:blur(10px);
+        transform:scale(1.6);
+        filter:blur(8px);
     }
 
     to{
@@ -439,16 +412,16 @@ body{
     }
 }
 
-/* ================================
+/* ===============================
    SECOND ENVELOPE
 ================================ */
 
 .second-label{
-    margin-bottom:50px;
+    margin-bottom:35px;
 
     font-family:'Cormorant Garamond',serif;
 
-    font-size:30px;
+    font-size:28px;
 
     color:rgba(255,255,255,.8);
 }
@@ -458,18 +431,26 @@ body{
 }
 
 .second-envelope{
-    transform:scale(.85);
+    transform:scale(.82);
 }
 
-/* ================================
+/* ===============================
    FINAL SCREEN
 ================================ */
 
 #finalScreen{
+
     overflow-y:auto;
 
+    /*
+       IMPORTANT:
+       Extra top space so that
+       birthday title stays lower
+       on phone video.
+    */
+
     padding:
-        35px 16px;
+        135px 15px 45px;
 
     justify-content:flex-start;
 
@@ -477,23 +458,28 @@ body{
 
     background:
         radial-gradient(
-            circle at 50% 25%,
-            rgba(217,180,91,.12),
+            circle at 50% 35%,
+            rgba(218,178,78,.13),
             transparent 30%
         );
 }
 
 .final-inner{
-    width:100%;
-    max-width:700px;
 
-    margin:auto;
+    width:100%;
+
+    max-width:650px;
+
+    margin:0 auto;
 
     padding:
-        10px 0 25px;
+        5px 0 35px;
 }
 
+/* small heading */
+
 .eyebrow{
+
     font-size:8px;
 
     letter-spacing:5px;
@@ -502,74 +488,88 @@ body{
 
     text-transform:uppercase;
 
-    margin-bottom:15px;
+    margin-bottom:14px;
 }
 
-/* SMALLER HAPPY BIRTHDAY */
+/* HAPPY BIRTHDAY */
 
 .happy{
+
     font-family:'Cormorant Garamond',serif;
 
+    /*
+       Smaller so it fits phone.
+    */
+
     font-size:
-        clamp(45px,10vw,92px);
+        clamp(42px,9vw,90px);
 
     font-weight:500;
 
-    line-height:.82;
+    line-height:.83;
 
-    letter-spacing:-1px;
+    letter-spacing:0;
 
     background:
         linear-gradient(
             100deg,
             #fff,
             #d9b45b,
-            #fff3c5,
+            #fff0bd,
             #c79c42
         );
 
     background-size:300%;
 
     -webkit-background-clip:text;
+
     background-clip:text;
 
     color:transparent;
 
     animation:
-        goldFlow 5s linear infinite,
-        revealUp 1.5s ease;
+        goldMove 5s linear infinite,
+        revealTitle 1.4s ease;
 }
 
-@keyframes goldFlow{
+@keyframes goldMove{
 
     to{
         background-position:300% center;
     }
 }
 
-@keyframes revealUp{
+@keyframes revealTitle{
 
     from{
         opacity:0;
+
         transform:
-            translateY(35px)
-            scale(.94);
+            translateY(30px)
+            scale(.95);
 
         filter:blur(8px);
     }
 
     to{
         opacity:1;
+
         transform:none;
+
         filter:blur(0);
     }
 }
 
+/* gold line */
+
 .line{
-    width:65px;
+
+    width:60px;
+
     height:1px;
 
-    margin:18px auto;
+    margin:
+        15px auto;
 
     background:
         linear-gradient(
@@ -580,23 +580,29 @@ body{
         );
 }
 
+/* belongs */
+
 .for-text{
-    font-size:8px;
+
+    font-size:7px;
 
     letter-spacing:3px;
 
     text-transform:uppercase;
 
-    color:rgba(255,255,255,.45);
+    color:rgba(255,255,255,.43);
 }
 
+/* name */
+
 .name{
-    margin-top:2px;
+
+    margin-top:3px;
 
     font-family:'Cormorant Garamond',serif;
 
     font-size:
-        clamp(38px,8vw,70px);
+        clamp(36px,8vw,70px);
 
     font-weight:500;
 
@@ -608,21 +614,27 @@ body{
         0 0 25px rgba(217,180,91,.15);
 }
 
+/* date */
+
 .date{
+
     margin-top:6px;
 
-    font-size:9px;
+    font-size:8px;
 
     letter-spacing:5px;
 
-    color:rgba(255,255,255,.55);
+    color:rgba(255,255,255,.5);
 }
 
+/* cake */
+
 .cake{
-    font-size:60px;
+
+    font-size:48px;
 
     margin:
-        16px 0 12px;
+        13px 0 10px;
 
     animation:
         cakeFloat 3s ease-in-out infinite;
@@ -635,55 +647,69 @@ body{
     }
 
     50%{
-        transform:translateY(-8px);
+        transform:translateY(-7px);
     }
 }
 
-.message{
-    max-width:570px;
+/* message */
 
-    margin:auto;
+.message{
+
+    width:100%;
+
+    max-width:520px;
+
+    margin:0 auto;
 
     font-family:'Cormorant Garamond',serif;
 
     font-size:
-        clamp(16px,4vw,20px);
+        clamp(15px,3.8vw,20px);
 
-    line-height:1.55;
+    line-height:1.5;
 
-    color:rgba(255,255,255,.72);
+    color:rgba(255,255,255,.7);
 }
 
+/* quote */
+
 .quote{
-    margin-top:17px;
+
+    margin-top:15px;
 
     font-family:'Cormorant Garamond',serif;
 
     font-size:
-        clamp(18px,4.5vw,23px);
+        clamp(17px,4vw,23px);
+
+    line-height:1.25;
 
     font-style:italic;
 
     color:#d9b45b;
 }
 
+/* signature */
+
 .signature{
-    margin-top:20px;
 
-    font-size:7px;
+    margin-top:18px;
 
-    letter-spacing:4px;
+    font-size:6px;
 
-    color:rgba(255,255,255,.25);
+    letter-spacing:3px;
+
+    color:rgba(255,255,255,.24);
 
     text-transform:uppercase;
 }
 
-/* ================================
+/* ===============================
    CONFETTI
 ================================ */
 
 .confetti{
+
     position:fixed;
 
     top:-20px;
@@ -693,12 +719,13 @@ body{
     pointer-events:none;
 
     animation:
-        confettiFall linear forwards;
+        fall linear forwards;
 }
 
-@keyframes confettiFall{
+@keyframes fall{
 
     to{
+
         transform:
             translateY(110vh)
             rotate(720deg);
@@ -707,11 +734,12 @@ body{
     }
 }
 
-/* ================================
+/* ===============================
    HEARTS
 ================================ */
 
 .heart{
+
     position:fixed;
 
     bottom:-40px;
@@ -721,17 +749,13 @@ body{
     pointer-events:none;
 
     animation:
-        heartFloat linear forwards;
-
-    filter:
-        drop-shadow(
-            0 0 8px rgba(217,180,91,.3)
-        );
+        floatHeart linear forwards;
 }
 
-@keyframes heartFloat{
+@keyframes floatHeart{
 
     to{
+
         transform:
             translateY(-115vh)
             rotate(25deg);
@@ -740,194 +764,237 @@ body{
     }
 }
 
-/* ================================
+/* ===============================
    MOBILE
 ================================ */
 
 @media(max-width:600px){
 
-    /* ENVELOPE */
+    /* first envelope */
 
     .envelope-wrapper{
-        width:245px;
-        height:175px;
+
+        width:240px;
+        height:170px;
     }
 
     .envelope.open .letter{
+
         transform:
-            translateY(-85px)
+            translateY(-80px)
             translateZ(30px);
     }
 
     .seal{
-        width:50px;
-        height:50px;
 
-        font-size:20px;
+        width:49px;
+        height:49px;
+
+        font-size:19px;
     }
 
     .open-hint{
-        margin-top:32px;
 
-        font-size:8px;
+        margin-top:30px;
 
-        letter-spacing:4px;
-    }
-
-    /* COUNTDOWN */
-
-    .countdown-number{
-        font-size:105px;
-    }
-
-    .countdown-caption{
         font-size:7px;
 
         letter-spacing:4px;
     }
 
-    /* SECOND */
+    /* countdown */
+
+    .countdown-number{
+
+        font-size:95px;
+    }
+
+    .countdown-caption{
+
+        font-size:7px;
+
+        letter-spacing:4px;
+    }
+
+    /* second */
 
     .second-label{
-        margin-bottom:25px;
 
-        font-size:23px;
+        margin-bottom:20px;
+
+        font-size:22px;
     }
 
     .second-envelope{
-        transform:scale(.72);
+
+        transform:scale(.68);
     }
 
     /* FINAL */
 
     #finalScreen{
+
+        /*
+           THIS pushes the whole birthday
+           section lower on the phone.
+        */
+
         padding:
-            25px 14px;
+            145px 12px 45px;
+
+        overflow-y:auto;
     }
 
     .final-inner{
+
         padding:
-            4px 0 20px;
+            5px 0 30px;
     }
 
     .eyebrow{
-        font-size:7px;
 
-        letter-spacing:4px;
+        font-size:6px;
 
-        margin-bottom:12px;
+        letter-spacing:3px;
+
+        margin-bottom:11px;
     }
 
     .happy{
-        font-size:46px;
 
-        line-height:.84;
+        font-size:42px;
 
-        letter-spacing:-.5px;
+        line-height:.85;
+
+        letter-spacing:0;
     }
 
     .line{
-        width:55px;
 
-        margin:14px auto;
+        width:50px;
+
+        margin:
+            13px auto;
     }
 
     .for-text{
-        font-size:7px;
 
-        letter-spacing:2.5px;
+        font-size:6px;
+
+        letter-spacing:2px;
     }
 
     .name{
-        font-size:40px;
 
-        margin-top:2px;
+        font-size:38px;
+
+        margin-top:3px;
     }
 
     .date{
-        font-size:8px;
+
+        font-size:7px;
 
         letter-spacing:4px;
     }
 
     .cake{
-        font-size:48px;
+
+        font-size:45px;
 
         margin:
-            12px 0 10px;
+            12px 0 9px;
     }
 
     .message{
-        font-size:16px;
 
-        line-height:1.48;
+        max-width:330px;
 
-        max-width:340px;
+        font-size:15px;
+
+        line-height:1.45;
     }
 
     .quote{
-        font-size:18px;
 
-        line-height:1.25;
+        font-size:17px;
 
         margin-top:14px;
     }
 
     .signature{
-        font-size:6px;
 
-        letter-spacing:3px;
+        font-size:5.5px;
+
+        letter-spacing:2.5px;
 
         margin-top:17px;
     }
 }
 
-/* VERY SMALL PHONES */
+/* ===============================
+   VERY SMALL PHONES
+================================ */
 
 @media(max-width:380px){
 
     .envelope-wrapper{
-        width:225px;
-        height:160px;
+
+        width:220px;
+        height:155px;
     }
 
     .countdown-number{
-        font-size:90px;
+
+        font-size:85px;
     }
 
     .second-envelope{
-        transform:scale(.64);
+
+        transform:scale(.62);
     }
 
     #finalScreen{
+
+        /*
+           Even more breathing room
+           for small phone video.
+        */
+
         padding:
-            20px 12px;
+            155px 10px 40px;
     }
 
     .happy{
-        font-size:40px;
+
+        font-size:38px;
     }
 
     .name{
-        font-size:36px;
+
+        font-size:34px;
     }
 
     .cake{
-        font-size:43px;
+
+        font-size:40px;
     }
 
     .message{
-        font-size:15px;
 
-        line-height:1.42;
+        font-size:14px;
+
+        line-height:1.4;
     }
 
     .quote{
-        font-size:17px;
+
+        font-size:16px;
     }
 }
 </style>
 </head>
+
 
 <body>
 
@@ -936,9 +1003,9 @@ body{
 <canvas id="stars"></canvas>
 
 
-<!-- =========================================
-     FIRST SCREEN
-========================================= -->
+<!-- ==========================================
+     FIRST ENVELOPE
+========================================== -->
 
 <section
     id="introScreen"
@@ -948,6 +1015,7 @@ body{
     <div class="intro-subtitle">
         A little surprise is waiting
     </div>
+
 
     <div
         class="envelope-wrapper"
@@ -977,6 +1045,7 @@ body{
 
     </div>
 
+
     <div class="open-hint">
         Tap to open
     </div>
@@ -984,9 +1053,9 @@ body{
 </section>
 
 
-<!-- =========================================
+<!-- ==========================================
      COUNTDOWN
-========================================= -->
+========================================== -->
 
 <section
     id="countdownScreen"
@@ -1000,6 +1069,7 @@ body{
         3
     </div>
 
+
     <div class="countdown-caption">
         Something beautiful is coming
     </div>
@@ -1007,9 +1077,9 @@ body{
 </section>
 
 
-<!-- =========================================
+<!-- ==========================================
      SECOND ENVELOPE
-========================================= -->
+========================================== -->
 
 <section
     id="secondScreen"
@@ -1017,8 +1087,12 @@ body{
 >
 
     <div class="second-label">
-        One last <span>surprise...</span>
+
+        One last
+        <span>surprise...</span>
+
     </div>
+
 
     <div
         class="envelope-wrapper second-envelope"
@@ -1048,6 +1122,7 @@ body{
 
     </div>
 
+
     <div class="open-hint">
         Tap to reveal
     </div>
@@ -1055,9 +1130,9 @@ body{
 </section>
 
 
-<!-- =========================================
-     FINAL BIRTHDAY SCREEN
-========================================= -->
+<!-- ==========================================
+     FINAL BIRTHDAY
+========================================== -->
 
 <section
     id="finalScreen"
@@ -1066,9 +1141,11 @@ body{
 
     <div class="final-inner">
 
+
         <div class="eyebrow">
             Today is all about you
         </div>
+
 
         <div class="happy">
 
@@ -1077,23 +1154,29 @@ body{
 
         </div>
 
+
         <div class="line"></div>
+
 
         <div class="for-text">
             This beautiful day belongs to
         </div>
 
+
         <div class="name">
             Maisha Farin
         </div>
+
 
         <div class="date">
             20 • SEPTEMBER
         </div>
 
+
         <div class="cake">
             🎂
         </div>
+
 
         <p class="message">
 
@@ -1112,6 +1195,7 @@ body{
 
         </p>
 
+
         <div class="quote">
 
             "You deserve all the beautiful things
@@ -1119,11 +1203,13 @@ body{
 
         </div>
 
+
         <div class="signature">
 
             Made with love • For Maisha Farin
 
         </div>
+
 
     </div>
 
@@ -1132,21 +1218,29 @@ body{
 
 <script>
 
-/* =========================================
+/* ==========================================
    SCREEN CONTROL
-========================================= */
+========================================== */
 
 const introScreen =
-    document.getElementById("introScreen");
+    document.getElementById(
+        "introScreen"
+    );
 
 const countdownScreen =
-    document.getElementById("countdownScreen");
+    document.getElementById(
+        "countdownScreen"
+    );
 
 const secondScreen =
-    document.getElementById("secondScreen");
+    document.getElementById(
+        "secondScreen"
+    );
 
 const finalScreen =
-    document.getElementById("finalScreen");
+    document.getElementById(
+        "finalScreen"
+    );
 
 
 function changeScreen(screen){
@@ -1154,42 +1248,66 @@ function changeScreen(screen){
     document
         .querySelectorAll(".screen")
         .forEach(item=>{
-            item.classList.remove("active");
+
+            item.classList.remove(
+                "active"
+            );
+
         });
 
+
     setTimeout(()=>{
-        screen.classList.add("active");
+
+        screen.classList.add(
+            "active"
+        );
+
     },150);
 }
 
 
-/* =========================================
+/* ==========================================
    FIRST ENVELOPE
-========================================= */
+========================================== */
 
 let firstOpened=false;
 
+
 function openFirstEnvelope(){
 
-    if(firstOpened) return;
+    if(firstOpened)
+        return;
+
 
     firstOpened=true;
 
+
     const envelope =
         document
-        .getElementById("firstEnvelope")
-        .querySelector(".envelope");
+        .getElementById(
+            "firstEnvelope"
+        )
+        .querySelector(
+            ".envelope"
+        );
 
-    envelope.classList.add("open");
 
-    createSmallSparkles(
+    envelope.classList.add(
+        "open"
+    );
+
+
+    createSparkles(
         window.innerWidth/2,
         window.innerHeight/2
     );
 
+
     setTimeout(()=>{
 
-        changeScreen(countdownScreen);
+        changeScreen(
+            countdownScreen
+        );
 
         startCountdown();
 
@@ -1197,9 +1315,9 @@ function openFirstEnvelope(){
 }
 
 
-/* =========================================
+/* ==========================================
    COUNTDOWN
-========================================= */
+========================================== */
 
 function startCountdown(){
 
@@ -1208,84 +1326,117 @@ function startCountdown(){
             "countdownNumber"
         );
 
+
     let count=3;
+
 
     number.textContent=count;
 
-    const timer=setInterval(()=>{
 
-        count--;
+    const timer =
+        setInterval(()=>{
 
-        if(count>0){
+            count--;
 
-            number.style.animation="none";
 
-            void number.offsetWidth;
+            if(count>0){
 
-            number.style.animation=
-                "countdownIn .9s ease";
+                number.style.animation=
+                    "none";
 
-            number.textContent=count;
+                void number.offsetWidth;
 
-        }
+                number.style.animation=
+                    "countIn .9s ease";
 
-        else{
+                number.textContent=
+                    count;
 
-            clearInterval(timer);
+            }
 
-            number.style.animation="none";
+            else{
 
-            void number.offsetWidth;
+                clearInterval(timer);
 
-            number.style.animation=
-                "countdownIn .9s ease";
 
-            number.textContent="✦";
+                number.style.animation=
+                    "none";
 
-            setTimeout(()=>{
+                void number.offsetWidth;
 
-                changeScreen(secondScreen);
+                number.style.animation=
+                    "countIn .9s ease";
 
-            },900);
-        }
+                number.textContent=
+                    "✦";
 
-    },1000);
+
+                setTimeout(()=>{
+
+                    changeScreen(
+                        secondScreen
+                    );
+
+                },900);
+
+            }
+
+        },1000);
 }
 
 
-/* =========================================
+/* ==========================================
    SECOND ENVELOPE
-========================================= */
+========================================== */
 
 let secondOpened=false;
 
+
 function openSecondEnvelope(){
 
-    if(secondOpened) return;
+    if(secondOpened)
+        return;
+
 
     secondOpened=true;
 
+
     const envelope =
         document
-        .getElementById("secondEnvelope")
-        .querySelector(".envelope");
+        .getElementById(
+            "secondEnvelope"
+        )
+        .querySelector(
+            ".envelope"
+        );
 
-    envelope.classList.add("open");
 
-    createSmallSparkles(
+    envelope.classList.add(
+        "open"
+    );
+
+
+    createSparkles(
         window.innerWidth/2,
         window.innerHeight/2
     );
 
+
     setTimeout(()=>{
 
-        changeScreen(finalScreen);
+        changeScreen(
+            finalScreen
+        );
 
-        document.body.style.overflow="auto";
+
+        document.body.style.overflow=
+            "auto";
+
 
         setTimeout(()=>{
 
             createConfetti();
+
             createHearts();
 
         },600);
@@ -1294,9 +1445,9 @@ function openSecondEnvelope(){
 }
 
 
-/* =========================================
+/* ==========================================
    CONFETTI
-========================================= */
+========================================== */
 
 function createConfetti(){
 
@@ -1309,6 +1460,7 @@ function createConfetti(){
         "♥"
     ];
 
+
     const colors=[
         "#d9b45b",
         "#ffe7a0",
@@ -1316,52 +1468,82 @@ function createConfetti(){
         "#b58b32"
     ];
 
-    for(let i=0;i<120;i++){
+
+    for(
+        let i=0;
+        i<120;
+        i++
+    ){
 
         setTimeout(()=>{
 
             const piece =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
 
-            piece.className="confetti";
+
+            piece.className=
+                "confetti";
+
 
             piece.textContent=
                 symbols[
                     Math.floor(
-                        Math.random()*symbols.length
+                        Math.random()*
+                        symbols.length
                     )
                 ];
 
+
             piece.style.left=
-                Math.random()*100+"vw";
+                Math.random()*100+
+                "vw";
+
 
             piece.style.fontSize=
-                (Math.random()*10+6)+"px";
+                (
+                    Math.random()*10+
+                    6
+                )+"px";
+
 
             piece.style.color=
                 colors[
                     Math.floor(
-                        Math.random()*colors.length
+                        Math.random()*
+                        colors.length
                     )
                 ];
 
-            piece.style.animationDuration=
-                (Math.random()*3+3)+"s";
 
-            document.body.appendChild(piece);
+            piece.style.animationDuration=
+                (
+                    Math.random()*3+
+                    3
+                )+"s";
+
+
+            document.body.appendChild(
+                piece
+            );
+
 
             setTimeout(()=>{
+
                 piece.remove();
+
             },7000);
 
         },i*20);
+
     }
 }
 
 
-/* =========================================
-   FLOATING HEARTS
-========================================= */
+/* ==========================================
+   HEARTS
+========================================== */
 
 function createHearts(){
 
@@ -1372,52 +1554,81 @@ function createHearts(){
         "✧"
     ];
 
-    for(let i=0;i<24;i++){
+
+    for(
+        let i=0;
+        i<24;
+        i++
+    ){
 
         setTimeout(()=>{
 
             const heart =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
 
-            heart.className="heart";
+
+            heart.className=
+                "heart";
+
 
             heart.textContent=
                 hearts[
                     Math.floor(
-                        Math.random()*hearts.length
+                        Math.random()*
+                        hearts.length
                     )
                 ];
 
+
             heart.style.left=
-                Math.random()*100+"vw";
+                Math.random()*100+
+                "vw";
+
 
             heart.style.fontSize=
-                (Math.random()*15+10)+"px";
+                (
+                    Math.random()*15+
+                    10
+                )+"px";
+
 
             heart.style.color=
                 Math.random()>.5
                 ? "#d9b45b"
                 : "#fff1bd";
 
-            heart.style.animationDuration=
-                (Math.random()*5+5)+"s";
 
-            document.body.appendChild(heart);
+            heart.style.animationDuration=
+                (
+                    Math.random()*5+
+                    5
+                )+"s";
+
+
+            document.body.appendChild(
+                heart
+            );
+
 
             setTimeout(()=>{
+
                 heart.remove();
+
             },10000);
 
         },i*250);
+
     }
 }
 
 
-/* =========================================
+/* ==========================================
    SPARKLES
-========================================= */
+========================================== */
 
-function createSmallSparkles(x,y){
+function createSparkles(x,y){
 
     const symbols=[
         "✦",
@@ -1426,48 +1637,80 @@ function createSmallSparkles(x,y){
         "◆"
     ];
 
-    for(let i=0;i<30;i++){
+
+    for(
+        let i=0;
+        i<30;
+        i++
+    ){
 
         const sparkle =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
-        sparkle.style.position="fixed";
 
-        sparkle.style.left=x+"px";
+        sparkle.style.position=
+            "fixed";
 
-        sparkle.style.top=y+"px";
+        sparkle.style.left=
+            x+"px";
 
-        sparkle.style.zIndex="80";
+        sparkle.style.top=
+            y+"px";
 
-        sparkle.style.pointerEvents="none";
+        sparkle.style.zIndex=
+            "80";
 
-        sparkle.style.color="#d9b45b";
+        sparkle.style.pointerEvents=
+            "none";
+
+        sparkle.style.color=
+            "#d9b45b";
 
         sparkle.style.fontSize=
-            (Math.random()*12+6)+"px";
+            (
+                Math.random()*12+
+                6
+            )+"px";
+
 
         sparkle.textContent=
             symbols[
                 Math.floor(
-                    Math.random()*symbols.length
+                    Math.random()*
+                    symbols.length
                 )
             ];
 
-        document.body.appendChild(sparkle);
+
+        document.body.appendChild(
+            sparkle
+        );
+
 
         const angle=
-            Math.random()*Math.PI*2;
+            Math.random()*
+            Math.PI*2;
+
 
         const distance=
-            Math.random()*180+40;
+            Math.random()*180+
+            40;
+
 
         const endX=
-            Math.cos(angle)*distance;
+            Math.cos(angle)*
+            distance;
+
 
         const endY=
-            Math.sin(angle)*distance;
+            Math.sin(angle)*
+            distance;
+
 
         sparkle.animate(
+
             [
                 {
                     transform:
@@ -1487,36 +1730,48 @@ function createSmallSparkles(x,y){
                     opacity:0
                 }
             ],
+
             {
                 duration:
-                    Math.random()*900+700,
+                    Math.random()*900+
+                    700,
 
                 easing:
                     "cubic-bezier(.22,1,.36,1)"
             }
+
         );
 
+
         setTimeout(()=>{
+
             sparkle.remove();
+
         },1800);
+
     }
 }
 
 
-/* =========================================
+/* ==========================================
    BACKGROUND STARS
-========================================= */
+========================================== */
 
 const canvas =
-    document.getElementById("stars");
+    document.getElementById(
+        "stars"
+    );
 
 const ctx =
-    canvas.getContext("2d");
+    canvas.getContext(
+        "2d"
+    );
+
 
 let particles=[];
 
 
-function resize(){
+function resizeCanvas(){
 
     canvas.width=
         window.innerWidth;
@@ -1525,15 +1780,21 @@ function resize(){
         window.innerHeight;
 }
 
-resize();
+
+resizeCanvas();
+
 
 window.addEventListener(
     "resize",
-    resize
+    resizeCanvas
 );
 
 
-for(let i=0;i<100;i++){
+for(
+    let i=0;
+    i<100;
+    i++
+){
 
     particles.push({
 
@@ -1546,14 +1807,21 @@ for(let i=0;i<100;i++){
             window.innerHeight,
 
         radius:
-            Math.random()*1.4+.2,
+            Math.random()*
+            1.4+
+            .2,
 
         speed:
-            Math.random()*.25+.03,
+            Math.random()*
+            .25+
+            .03,
 
         opacity:
-            Math.random()*.6+.1
+            Math.random()*
+            .6+
+            .1
     });
+
 }
 
 
@@ -1566,15 +1834,21 @@ function animateStars(){
         canvas.height
     );
 
+
     particles.forEach(p=>{
 
         p.y-=p.speed;
 
+
         if(p.y<0){
-            p.y=canvas.height;
+
+            p.y=
+                canvas.height;
         }
 
+
         ctx.beginPath();
+
 
         ctx.arc(
             p.x,
@@ -1584,6 +1858,7 @@ function animateStars(){
             Math.PI*2
         );
 
+
         ctx.fillStyle=
             `rgba(
                 255,
@@ -1592,14 +1867,17 @@ function animateStars(){
                 ${p.opacity}
             )`;
 
+
         ctx.fill();
 
     });
+
 
     requestAnimationFrame(
         animateStars
     );
 }
+
 
 animateStars();
 
