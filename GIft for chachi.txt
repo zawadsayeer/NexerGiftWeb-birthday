@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Surprise</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    overflow:hidden;
+    background:
+        radial-gradient(circle at 50% 40%, #251d0b 0%, #0c0a06 35%, #030303 80%);
+    color:white;
+    font-family:'Poppins',sans-serif;
+}
+
+#particles{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:1;
+}
+
+/* =========================
+   COMMON SCREEN
+========================= */
+
+.screen{
+    position:fixed;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    transition:opacity 1s ease, transform 1s ease;
+    z-index:5;
+}
+
+.hidden{
+    opacity:0;
+    pointer-events:none;
+    transform:scale(1.08);
+}
+
+/* =========================
+   FIRST ENVELOPE
+========================= */
+
+.intro-text{
+    position:absolute;
+    top:16%;
+    text-align:center;
+    color:rgba(255,255,255,.65);
+    letter-spacing:4px;
+    font-size:11px;
+    text-transform:uppercase;
+}
+
+.envelope{
+    width:270px;
+    height:180px;
+    position:relative;
+    cursor:pointer;
+    filter:
+        drop-shadow(0 25px 35px rgba(0,0,0,.65))
+        drop-shadow(0 0 25px rgba(212,175,55,.12));
+    transition:.5s;
+}
+
+.envelope:hover{
+    transform:translateY(-8px) scale(1.03);
+}
+
+.env-body{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(145deg,#c7a44b,#80651d);
+    border-radius:5px;
+    overflow:hidden;
+}
+
+.env-body::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        135deg,
+        rgba(255,255,255,.22),
+        transparent 35%
+    );
+}
+
+.flap{
+    position:absolute;
+    left:0;
+    top:0;
+    width:0;
+    height:0;
+    border-left:135px solid transparent;
+    border-right:135px solid transparent;
+    border-top:95px solid #e0bf62;
+    transform-origin:top center;
+    transition:1s ease;
+    z-index:5;
+    filter:drop-shadow(0 3px 3px rgba(0,0,0,.25));
+}
+
+.envelope.open .flap{
+    transform:rotateX(180deg);
+    z-index:1;
+}
+
+.env-left{
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:0;
+    height:0;
+    border-top:90px solid transparent;
+    border-bottom:90px solid transparent;
+    border-left:135px solid #a27e29;
+    z-index:3;
+}
+
+.env-right{
+    position:absolute;
+    bottom:0;
+    right:0;
+    width:0;
+    height:0;
+    border-top:90px solid transparent;
+    border-bottom:90px solid transparent;
+    border-right:135px solid #a27e29;
+    z-index:3;
+}
+
+.env-bottom{
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:0;
+    height:0;
+    border-left:135px solid transparent;
+    border-right:135px solid transparent;
+    border-bottom:100px solid #b28e35;
+    z-index:4;
+}
+
+.seal{
+    position:absolute;
+    width:54px;
+    height:54px;
+    border-radius:50%;
+    background:
+        radial-gradient(circle at 35% 30%,#fff1a8,#d4af37 45%,#80621c);
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-25%);
+    z-index:6;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:23px;
+    box-shadow:0 5px 15px rgba(0,0,0,.4);
+    transition:.4s;
+}
+
+.envelope.open .seal{
+    opacity:0;
+}
+
+.tap-text{
+    margin-top:38px;
+    color:#d4af37;
+    letter-spacing:3px;
+    font-size:12px;
+    animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+    50%{opacity:.35;}
+}
+
+/* =========================
+   COUNTDOWN
+========================= */
+
+.countdown-number{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(110px,25vw,230px);
+    color:#d4af37;
+    text-shadow:
+        0 0 25px rgba(212,175,55,.35),
+        0 0 80px rgba(212,175,55,.15);
+    animation:numberIn .9s ease;
+}
+
+.countdown-label{
+    color:rgba(255,255,255,.55);
+    letter-spacing:7px;
+    font-size:11px;
+    text-transform:uppercase;
+    margin-top:-25px;
+}
+
+@keyframes numberIn{
+    0%{
+        opacity:0;
+        transform:scale(1.7);
+    }
+    70%{
+        opacity:1;
+        transform:scale(.95);
+    }
+    100%{
+        transform:scale(1);
+    }
+}
+
+/* =========================
+   SECOND ENVELOPE
+========================= */
+
+.second-title{
+    font-family:'Cormorant Garamond',serif;
+    font-size:28px;
+    color:#eee;
+    margin-bottom:45px;
+}
+
+.second-title span{
+    color:#d4af37;
+}
+
+.small-envelope{
+    transform:scale(.8);
+}
+
+/* =========================
+   BIRTHDAY SCREEN
+========================= */
+
+#birthdayScreen{
+    overflow-y:auto;
+    padding:30px 18px;
+    text-align:center;
+    background:
+        radial-gradient(circle at 50% 25%,rgba(212,175,55,.13),transparent 32%),
+        #050505;
+}
+
+.gold-line{
+    width:90px;
+    height:1px;
+    background:#d4af37;
+    margin:25px auto;
+}
+
+.happy{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(55px,11vw,110px);
+    font-weight:600;
+    line-height:.9;
+    background:linear-gradient(
+        90deg,
+        #fff,
+        #d4af37,
+        #fff
+    );
+    background-size:200%;
+    -webkit-background-clip:text;
+    color:transparent;
+    animation:goldShine 4s linear infinite;
+}
+
+@keyframes goldShine{
+    to{
+        background-position:200% center;
+    }
+}
+
+.birthday-to{
+    margin-top:20px;
+    font-size:14px;
+    letter-spacing:5px;
+    color:#aaa;
+    text-transform:uppercase;
+}
+
+.name{
+    margin-top:8px;
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(45px,9vw,80px);
+    color:#d4af37;
+}
+
+.date{
+    margin-top:8px;
+    color:#ddd;
+    letter-spacing:5px;
+    font-size:15px;
+}
+
+.cake{
+    font-size:85px;
+    margin:30px 0 15px;
+    animation:cakeFloat 3s ease-in-out infinite;
+}
+
+@keyframes cakeFloat{
+    50%{
+        transform:translateY(-12px);
+    }
+}
+
+.message{
+    max-width:650px;
+    margin:0 auto;
+    color:#bbb;
+    font-size:15px;
+    line-height:2;
+}
+
+.quote{
+    margin:28px auto 0;
+    color:#d4af37;
+    font-family:'Cormorant Garamond',serif;
+    font-size:23px;
+    font-style:italic;
+}
+
+.footer{
+    margin-top:50px;
+    padding-bottom:20px;
+    font-size:10px;
+    letter-spacing:4px;
+    color:#555;
+}
+
+/* =========================
+   CONFETTI
+========================= */
+
+.confetti{
+    position:fixed;
+    width:8px;
+    height:12px;
+    top:-20px;
+    z-index:50;
+    animation:fall linear forwards;
+}
+
+@keyframes fall{
+    to{
+        transform:
+            translateY(110vh)
+            rotate(720deg);
+        opacity:0;
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:500px){
+
+    .envelope{
+        width:230px;
+        height:153px;
+    }
+
+    .flap{
+        border-left-width:115px;
+        border-right-width:115px;
+        border-top-width:80px;
+    }
+
+    .env-left{
+        border-top-width:76px;
+        border-bottom-width:76px;
+        border-left-width:115px;
+    }
+
+    .env-right{
+        border-top-width:76px;
+        border-bottom-width:76px;
+        border-right-width:115px;
+    }
+
+    .env-bottom{
+        border-left-width:115px;
+        border-right-width:115px;
+        border-bottom-width:85px;
+    }
+
+    .seal{
+        width:47px;
+        height:47px;
+    }
+
+    .happy{
+        font-size:55px;
+    }
+
+    .name{
+        font-size:48px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="particles"></canvas>
+
+<!-- =================================
+     SCREEN 1
+================================= -->
+
+<section id="firstScreen" class="screen">
+
+    <div class="intro-text">
+        Something special is waiting...
+    </div>
+
+    <div id="firstEnvelope" class="envelope"
+         onclick="openFirstEnvelope()">
+
+        <div class="env-body"></div>
+
+        <div class="flap"></div>
+
+        <div class="env-left"></div>
+        <div class="env-right"></div>
+        <div class="env-bottom"></div>
+
+        <div class="seal">✦</div>
+
+    </div>
+
+    <div class="tap-text">
+        TAP TO OPEN
+    </div>
+
+</section>
+
+
+<!-- =================================
+     COUNTDOWN
+================================= -->
+
+<section id="countdownScreen" class="screen hidden">
+
+    <div id="countdownNumber"
+         class="countdown-number">
+        3
+    </div>
+
+    <div class="countdown-label">
+        A little surprise...
+    </div>
+
+</section>
+
+
+<!-- =================================
+     SECOND ENVELOPE
+================================= -->
+
+<section id="secondScreen" class="screen hidden">
+
+    <div class="second-title">
+        One more little <span>surprise...</span>
+    </div>
+
+    <div id="secondEnvelope"
+         class="envelope small-envelope"
+         onclick="openSecondEnvelope()">
+
+        <div class="env-body"></div>
+
+        <div class="flap"></div>
+
+        <div class="env-left"></div>
+        <div class="env-right"></div>
+        <div class="env-bottom"></div>
+
+        <div class="seal">♥</div>
+
+    </div>
+
+    <div class="tap-text">
+        TAP TO OPEN
+    </div>
+
+</section>
+
+
+<!-- =================================
+     FINAL BIRTHDAY
+================================= -->
+
+<section id="birthdayScreen" class="screen hidden">
+
+    <div class="happy">
+        HAPPY<br>
+        BIRTHDAY
+    </div>
+
+    <div class="gold-line"></div>
+
+    <div class="birthday-to">
+        This special day belongs to
+    </div>
+
+    <div class="name">
+        Maisha Farin
+    </div>
+
+    <div class="date">
+        20 • SEPTEMBER
+    </div>
+
+    <div class="cake">
+        🎂
+    </div>
+
+    <p class="message">
+        May your beautiful smile never fade,
+        may your dreams slowly become reality,
+        and may every new chapter of your life
+        bring you more happiness, love and beautiful memories.
+        <br><br>
+        Today is your day.
+        So smile a little more,
+        and make another beautiful memory. ✨
+    </p>
+
+    <div class="quote">
+        "You deserve all the beautiful things life has to offer."
+    </div>
+
+    <div class="footer">
+        MADE WITH LOVE • FOR MAISHA FARIN
+    </div>
+
+</section>
+
+
+<script>
+
+/* =================================
+   SCREEN CONTROL
+================================= */
+
+const firstScreen =
+    document.getElementById("firstScreen");
+
+const countdownScreen =
+    document.getElementById("countdownScreen");
+
+const secondScreen =
+    document.getElementById("secondScreen");
+
+const birthdayScreen =
+    document.getElementById("birthdayScreen");
+
+
+function showScreen(screen){
+
+    [
+        firstScreen,
+        countdownScreen,
+        secondScreen,
+        birthdayScreen
+    ].forEach(s=>{
+        s.classList.add("hidden");
+    });
+
+    screen.classList.remove("hidden");
+}
+
+
+/* =================================
+   FIRST ENVELOPE
+================================= */
+
+let firstOpened=false;
+
+function openFirstEnvelope(){
+
+    if(firstOpened) return;
+
+    firstOpened=true;
+
+    const envelope =
+        document.getElementById("firstEnvelope");
+
+    envelope.classList.add("open");
+
+    setTimeout(()=>{
+
+        showScreen(countdownScreen);
+
+        startCountdown();
+
+    },1100);
+}
+
+
+/* =================================
+   COUNTDOWN
+================================= */
+
+function startCountdown(){
+
+    const number =
+        document.getElementById("countdownNumber");
+
+    let count=3;
+
+    number.textContent=count;
+
+    const timer=setInterval(()=>{
+
+        count--;
+
+        if(count>0){
+
+            number.style.animation="none";
+
+            void number.offsetWidth;
+
+            number.style.animation=
+                "numberIn .9s ease";
+
+            number.textContent=count;
+
+        }else{
+
+            clearInterval(timer);
+
+            number.style.animation=
+                "numberIn .9s ease";
+
+            number.textContent="✨";
+
+            setTimeout(()=>{
+
+                showScreen(secondScreen);
+
+            },900);
+        }
+
+    },1000);
+}
+
+
+/* =================================
+   SECOND ENVELOPE
+================================= */
+
+let secondOpened=false;
+
+function openSecondEnvelope(){
+
+    if(secondOpened) return;
+
+    secondOpened=true;
+
+    const envelope =
+        document.getElementById("secondEnvelope");
+
+    envelope.classList.add("open");
+
+    setTimeout(()=>{
+
+        showScreen(birthdayScreen);
+
+        document.body.style.overflow="auto";
+
+        createConfetti();
+
+    },1000);
+}
+
+
+/* =================================
+   CONFETTI
+================================= */
+
+function createConfetti(){
+
+    const symbols=[
+        "✦",
+        "✧",
+        "•",
+        "◆",
+        "♥"
+    ];
+
+    for(let i=0;i<130;i++){
+
+        setTimeout(()=>{
+
+            const piece =
+                document.createElement("div");
+
+            piece.className="confetti";
+
+            piece.textContent=
+                symbols[
+                    Math.floor(
+                        Math.random()*symbols.length
+                    )
+                ];
+
+            piece.style.left=
+                Math.random()*100+"vw";
+
+            piece.style.fontSize=
+                (Math.random()*12+7)+"px";
+
+            piece.style.color=
+                [
+                    "#d4af37",
+                    "#f5df91",
+                    "#ffffff",
+                    "#c49a32"
+                ][
+                    Math.floor(Math.random()*4)
+                ];
+
+            piece.style.animationDuration=
+                (Math.random()*3+3)+"s";
+
+            document.body.appendChild(piece);
+
+            setTimeout(()=>{
+                piece.remove();
+            },6500);
+
+        },i*18);
+    }
+}
+
+
+/* =================================
+   BACKGROUND PARTICLES
+================================= */
+
+const canvas=
+    document.getElementById("particles");
+
+const ctx=
+    canvas.getContext("2d");
+
+let particles=[];
+
+function resizeCanvas(){
+
+    canvas.width=window.innerWidth;
+    canvas.height=window.innerHeight;
+
+}
+
+resizeCanvas();
+
+window.addEventListener(
+    "resize",
+    resizeCanvas
+);
+
+for(let i=0;i<90;i++){
+
+    particles.push({
+
+        x:Math.random()*window.innerWidth,
+
+        y:Math.random()*window.innerHeight,
+
+        r:Math.random()*1.5+.3,
+
+        speed:Math.random()*.25+.05,
+
+        opacity:Math.random()*.5+.1
+
+    });
+
+}
+
+function animateParticles(){
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    particles.forEach(p=>{
+
+        p.y-=p.speed;
+
+        if(p.y<0){
+            p.y=canvas.height;
+        }
+
+        ctx.beginPath();
+
+        ctx.arc(
+            p.x,
+            p.y,
+            p.r,
+            0,
+            Math.PI*2
+        );
+
+        ctx.fillStyle=
+            `rgba(212,175,55,${p.opacity})`;
+
+        ctx.fill();
+
+    });
+
+    requestAnimationFrame(
+        animateParticles
+    );
+}
+
+animateParticles();
+
+</script>
+
+</body>
+</html>
